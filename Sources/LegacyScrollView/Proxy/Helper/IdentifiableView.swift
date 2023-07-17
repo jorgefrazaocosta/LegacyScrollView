@@ -11,6 +11,7 @@ import SwiftUI
 
 public struct LegacyIDView: UIViewRepresentable {
     let tag: Int
+    let backgroundColor: UIColor
 
     public func makeUIView(context: Context) -> UIView {
         let uiView = UIView()
@@ -20,15 +21,13 @@ public struct LegacyIDView: UIViewRepresentable {
 
     public func updateUIView(_ uiView: UIView, context: Context) {
         uiView.tag = tag
-        uiView.backgroundColor = .clear
+        uiView.backgroundColor = backgroundColor
     }
 }
 
 public extension View {
-    func legacyId<ID: Hashable>(_ id: ID) -> some View {
+    func legacyId<ID: Hashable>(_ id: ID, backgroundColor: UIColor = .white) -> some View {
         self
-            .background(LegacyIDView(tag: id.hashValue))
+            .background(LegacyIDView(tag: id.hashValue, backgroundColor: backgroundColor))
     }
 }
-
-
